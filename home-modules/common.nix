@@ -1,19 +1,5 @@
-{ pkgs, lib, inputs, nvidiaPackages, config, ... }:let 
-  nixGL = let 
-    nixglStuff = nvidiaPackages.nixgl.nvidiaPackages { version = "545.29.06"; sha256="sha256-grxVZ2rdQ0FsFG5wxiTI3GrxbMBMcjhoDFajDgBFsXs="; };
-  in
-  pkg: (pkgs.buildEnv rec {
-    name = "nixGL-${pkg.name}";
-    paths = [ pkg ] ++ [(pkgs.hiPrio (
-      pkgs.runCommand name {} ''
-        mkdir -p $out/bin
-        for bin in "${lib.getBin pkg}"/bin/*; do
-          echo > $out/bin/"$(basename "$bin")" \
-          "exec -a \"\$0\" ${lib.getExe nixglStuff.nixGLNvidia} \"$bin\" \"\$@\""
-        done;
-        chmod +x "$out"/bin/*
-        ''))];
-  })//{ inherit (pkg) version pname; };
+{ pkgs, lib, inputs, nvidiaPackages, config, ... }: let 
+  gWrap = config.jspspike.graphicsWrapper.functions;
 in {
   # Here's your list of packages, adding something to here and
   # rebuilding your config should be enough to make it available.
@@ -23,10 +9,11 @@ in {
     stateVersion = "23.11";
     packages = with pkgs; [
       # utils
-      ripgrep fd bat eza jq htop bottom ncdu duf
+      ripgrep fd bat eza jq htop bottom ncdu duf rust-analyzer rust-bindgen
 
       # apps
-      (nixGL telegram-desktop) (nixGL google-chrome)
+      (gWrap.opengl telegram-desktop) (gWrap.opengl google-chrome)
+
       # some nix-specific tools
       nix home-manager nix-output-monitor nix-tree nil comma
     ];
@@ -39,7 +26,7 @@ in {
     direnv = { enable = true; nix-direnv.enable = true; };
     alacritty = {
       enable = true;
-      package = nixGL pkgs.alacritty;
+      package = gWrap.opengl pkgs.alacritty;
       settings = {
         font.size = 12.0;
         colors = {
@@ -49,8 +36,6 @@ in {
     };
     git = {
       enable = true;
-      userName = "jspspike";
-      userEmail = "jspspike@gmail.com";
       delta = {
         enable = true;
       };
@@ -78,8 +63,15 @@ in {
           mv \"\${@}\" /tmp
         }\n
 
-        eval \"$(ssh-agent -s)\" > /dev/null\n
-        ssh-add ~/.ssh/key/key > /dev/null 2> /dev/null
+        _count=0
+        function slow {
+          let _count+=1
+          sleep $((_count / 10)).$((_count % 10))
+        }
+
+        # sorry josh
+        autoload -Uz add-zsh-hook
+        add-zsh-hook precmd slow
       ";
     };
     fzf = {
@@ -113,11 +105,12 @@ in {
     nixpkgs.flake = inputs.nixpkgs;
     # this is just a QOL entry that lets you refer to your flake by name rather than
     # by path. it'll let you do stuff like `nix flake update config` and `nix run config#eggnogg`
-    config.to = { type = "git"; url = "file://${config.home.homeDirectory}/wherever"; };
+    config.to = { type = "git"; url = "file://${config.home.homeDirectory}/wherever"; }; # !!!
   };
 
   imports = [
     inputs.nix-index-database.hmModules.nix-index
+    ./graphics.nix
     # if you end up configuring stuff with home-manager it's helpful to stick related bits
     # in their own modules and you can organize them however you want. Those modules
     # get merged in a pretty elegant way, as a trivial example if you were to define

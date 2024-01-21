@@ -60,6 +60,7 @@
   in {
     homeConfigurations = {
       desktop = home ./hosts/desktop.nix;
+      work = home ./hosts/work.nix;
     };
 
     inherit pkgs;
