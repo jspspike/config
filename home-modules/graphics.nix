@@ -48,7 +48,8 @@ in {
         wrapped = pkgs.runCommand name {} ''
           mkdir -p $out/bin
           for bin in "${lib.getBin pkg}"/bin/*; do
-            echo > $out/bin/"$(basename "$bin")" \
+            echo -e > $out/bin/"$(basename "$bin")" \
+            "#!/bin/bash\n" \
             "exec -a \"\$0\" ${lib.getExe graphicsWrapperPackage} \"$bin\" \"\$@\""
           done;
           chmod +x "$out"/bin/*
