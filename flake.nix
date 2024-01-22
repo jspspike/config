@@ -1,7 +1,3 @@
-# Really flakes are just a structured way of enumerating a set of inputs
-# and outputs. In this case you only care about one output (your homeConfiguration
-# for your laptop) but I've added a "packages" output so that packages from your
-# config are exposed and I can do something like `nix run github:jspspike/config#foo`
 {
   description = "An example config";
 
@@ -9,9 +5,6 @@
   # course the big one, but any project that has a flake.nix can be added here which
   # gives you the ability to lock their version independently from the rest of nixpkgs.
   inputs = {
-
-    # Picking which nixpkgs branch you use as an input (here I went with nixos-unstable)
-    # will affect how aggressive `nix flake update` will be when repinning your deps.
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     home-manager.url = "github:nix-community/home-manager";
@@ -42,7 +35,7 @@
     pinnedNixpkgs.url = "github:nixos/nixpkgs/6df37dc6a77654682fe9f071c62b4242b5342e04";
   };
 
-  outputs = { nixpkgs, home-manager, nix-index-database, nixgl, pinnedNixpkgs, self } @ inputs:
+  outputs = { nixpkgs, home-manager, nixgl, pinnedNixpkgs, self, ... } @ inputs:
     let
     pkgs = import nixpkgs {
       system = "x86_64-linux";
@@ -61,6 +54,7 @@
     homeConfigurations = {
       desktop = home ./hosts/desktop.nix;
       work = home ./hosts/work.nix;
+      laptop = home ./hosts/laptop.nix;
     };
 
     inherit pkgs;

@@ -34,14 +34,9 @@ in {
 
   config = {
     assertions = [
-      { assertion = (cfg.version != null || cfg.sha256 != null) && cfg.kind == "nvidia";
+      { assertion = ((cfg.version != null && cfg.sha256 != null) && cfg.kind == "nvidia") || (cfg.version == null && cfg.sha256 == null && cfg.kind == "intel");
         message = ''
           do not set `version` and `sha256` when using `jspspike.graphicsWrapper.kind`s other than nvidia (using kind ${cfg.kind})!
-        '';
-      }
-      { assertion = cfg.kind == "nvidia" && cfg.version != null && cfg.sha256 != null;
-        message = ''
-          `version` and `sha256` are required when using `jspspike.graphicsWrapper.kind` = "nvidia"!
         '';
       }
     ];

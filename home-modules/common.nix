@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, nvidiaPackages, config, ... }: let 
+{ pkgs, lib, inputs, config, ... }: let
   gWrap = config.jspspike.graphicsWrapper.functions;
 in {
   # Here's your list of packages, adding something to here and
@@ -17,6 +17,19 @@ in {
       # some nix-specific tools
       nix home-manager nix-output-monitor nix-tree nil comma
     ];
+    sessionVariables = {
+      WEE = "WOO"; # echo $WEE to check if it's working :P
+      NIX_PATH = "nixpkgs=flake:nixpkgs";
+    };
+    file = builtins.listToAttrs (map (path:
+      let f = lib.strings.removePrefix (inputs.self + "/dotfiles/") (toString path);
+      in {
+        name = f;
+        value = {
+          source = config.lib.file.mkOutOfStoreSymlink
+            (config.home.homeDirectory + "/config/dotfiles/" + f);
+        };
+      }) (lib.filesystem.listFilesRecursive ../dotfiles));
   };
 
   # this is the output that home-manager uses for "managed" stuff, when you want to start messing
@@ -36,11 +49,14 @@ in {
     };
     git = {
       enable = true;
+      userName = lib.mkDefault "jspspike";
+      userEmail = lib.mkDefault "jspspike@gmail.com";
       delta = {
         enable = true;
       };
       extraConfig.pull.rebase = "true";
       extraConfig.merge.conflictstyle = "diff3";
+      extraConfig.core.editor = "nvim";
     };
     zsh = {
       enable = true;
@@ -62,16 +78,6 @@ in {
         function rm {
           mv \"\${@}\" /tmp
         }\n
-
-        _count=0
-        function slow {
-          let _count+=1
-          sleep $((_count / 10)).$((_count % 10))
-        }
-
-        # sorry josh
-        autoload -Uz add-zsh-hook
-        add-zsh-hook precmd slow
       ";
     };
     fzf = {
@@ -86,16 +92,6 @@ in {
     clipmenu.enable = true;
   };
 
-  # everything else here is pretty much boilerplate that you don't really have to worry about
-  # if you just wanna start sticking packages in your PATH.
-
-  home = {
-    sessionVariables = {
-      WEE = "WOO"; # echo $WEE to check if it's working :P
-      NIX_PATH = "nixpkgs=flake:nixpkgs";
-    };
-  };
-
   # when you use something like `nix run nixpkgs#htop`, the registry is where nix looks up
   # the thing on the left hand side
   nix.registry = {
@@ -105,12 +101,13 @@ in {
     nixpkgs.flake = inputs.nixpkgs;
     # this is just a QOL entry that lets you refer to your flake by name rather than
     # by path. it'll let you do stuff like `nix flake update config` and `nix run config#eggnogg`
-    config.to = { type = "git"; url = "file://${config.home.homeDirectory}/wherever"; }; # !!!
+    config.to = { type = "git"; url = "file://${config.home.homeDirectory}/config"; }; # !!!
   };
 
   imports = [
     inputs.nix-index-database.hmModules.nix-index
     ./graphics.nix
+    ./nvim.nix
     # if you end up configuring stuff with home-manager it's helpful to stick related bits
     # in their own modules and you can organize them however you want. Those modules
     # get merged in a pretty elegant way, as a trivial example if you were to define
