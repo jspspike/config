@@ -9,7 +9,7 @@ in {
     stateVersion = "23.11";
     packages = with pkgs; [
       # utils
-      ripgrep fd bat eza jq htop bottom ncdu duf rust-analyzer rust-bindgen
+      ripgrep fd bat eza jq htop bottom ncdu duf rust-bindgen rustup
 
       # apps
       (gWrap.opengl telegram-desktop) (gWrap.opengl google-chrome)
@@ -41,7 +41,7 @@ in {
       enable = true;
       package = gWrap.opengl pkgs.alacritty;
       settings = {
-        font.size = 12.0;
+        font.size = lib.mkDefault 12.0;
         colors = {
           draw_bold_text_with_bright_colors = true;
         };

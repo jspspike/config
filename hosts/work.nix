@@ -12,6 +12,11 @@
       userName = "jjohnson";
       userEmail = "jjohnson@cloudflare.com";
     };
+    alacritty = {
+      settings = {
+        font.size = 10.0;
+      };
+    };
   };
   jspspike.graphicsWrapper = {
     kind = "intel";
