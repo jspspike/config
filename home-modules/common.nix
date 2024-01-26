@@ -20,6 +20,7 @@ in {
     sessionVariables = {
       WEE = "WOO"; # echo $WEE to check if it's working :P
       NIX_PATH = "nixpkgs=flake:nixpkgs";
+      DEFAULT_BROWSER = "${pkgs.google-chrome}/bin/google-chrome-stable";
     };
     file = builtins.listToAttrs (map (path:
       let f = lib.strings.removePrefix (inputs.self + "/dotfiles/") (toString path);
@@ -90,6 +91,20 @@ in {
   services = {
     # records your clipboard history
     clipmenu.enable = true;
+  };
+
+  xdg = {
+    mime.enable = true;
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "text/html" = "google-chrome.desktop";
+        "x-scheme-handler/http" = "org.qutebrowser.qutebrowser.desktop";
+        "x-scheme-handler/https" = "google-chrome.desktop";
+        "x-scheme-handler/about" = "google-chrome.desktop";
+        "x-scheme-handler/unknown" = "google-chrome.desktop";
+      };
+    };
   };
 
   # when you use something like `nix run nixpkgs#htop`, the registry is where nix looks up
