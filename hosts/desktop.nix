@@ -1,7 +1,9 @@
-{ pkgs, lib, inputs, nvidiaPackages, config, ... }:
-{
+{ pkgs, lib, inputs, nvidiaPackages, config, ... }: let
+  gWrap = config.jspspike.graphicsWrapper.functions;
+in {
   home = {
-    packages = with pkgs; [];
+    packages = with pkgs; [ (gWrap.opengl discord) ];
+
   };
   programs = {
   };

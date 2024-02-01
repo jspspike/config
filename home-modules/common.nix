@@ -20,6 +20,7 @@ in {
     sessionVariables = {
       WEE = "WOO"; # echo $WEE to check if it's working :P
       NIX_PATH = "nixpkgs=flake:nixpkgs";
+      BROWSER = "${pkgs.google-chrome}/bin/google-chrome-stable";
       DEFAULT_BROWSER = "${pkgs.google-chrome}/bin/google-chrome-stable";
     };
     file = builtins.listToAttrs (map (path:
@@ -37,7 +38,11 @@ in {
   # with that you can go to https://mipmip.github.io/home-manager-option-search and look under
   # programs.<name> or services.<name> for all the relevant options.
   programs = {
-    direnv = { enable = true; nix-direnv.enable = true; };
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+      enableZshIntegration = true;
+    };
     alacritty = {
       enable = true;
       package = gWrap.opengl pkgs.alacritty;
@@ -80,6 +85,18 @@ in {
           mv \"\${@}\" /tmp
         }\n
       ";
+      plugins = [
+        {
+          name = "zsh-nix-shell";
+          file = "nix-shell.plugin.zsh";
+          src = pkgs.fetchFromGitHub {
+            owner = "chisui";
+            repo = "zsh-nix-shell";
+            rev = "v0.8.0";
+            sha256 = "1lzrn0n4fxfcgg65v0qhnj7wnybybqzs4adz7xsrkgmcsr0ii8b7";
+          };
+        }
+      ];
     };
     fzf = {
       enable = true;
