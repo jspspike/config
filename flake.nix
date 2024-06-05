@@ -45,6 +45,11 @@
       inherit pkgs;
       modules = [ ./home-modules/common.nix hostModule ];
     };
+    machine = system: module: nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs; };
+      inherit system;
+      modules = [ module ];
+    };
     nvidiaPackages = import pinnedNixpkgs {
       system = "x86_64-linux";
       config.allowUnfree = true;
@@ -52,9 +57,12 @@
     };
   in {
     homeConfigurations = {
-      desktop = home ./hosts/desktop.nix;
       work = home ./hosts/work.nix;
       laptop = home ./hosts/laptop.nix;
+    };
+
+    nixosConfigurations = {
+      desktop = machine "x86_64-linux" ./hosts/desktop;
     };
 
     inherit pkgs;

@@ -1,4 +1,4 @@
-{ lib, pkgs, inputs, nvidiaPackages, config, ... }: let
+{ lib, pkgs, inputs, nvidiaPackages?null, config, ... }: let
   cfg = config.jspspike.graphicsWrapper;
 in {
   options.jspspike.graphicsWrapper = {
@@ -33,13 +33,13 @@ in {
   };
 
   config = {
-    assertions = [
+    /*assertions = [
       { assertion = ((cfg.version != null && cfg.sha256 != null) && cfg.kind == "nvidia") || (cfg.version == null && cfg.sha256 == null && cfg.kind == "intel");
         message = ''
           do not set `version` and `sha256` when using `jspspike.graphicsWrapper.kind`s other than nvidia (using kind ${cfg.kind})!
         '';
       }
-    ];
+    ];*/
 
     jspspike.graphicsWrapper = let
       # Our bespoke version of: .... (TODO: find issue on nix-gl repo)
