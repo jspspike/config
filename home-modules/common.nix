@@ -9,7 +9,7 @@ in {
     stateVersion = "23.11";
     packages = with pkgs; [
       # utils
-      ripgrep fd bat eza jq htop bottom ncdu duf rust-bindgen rustup pavucontrol libqalculate flameshot
+      ripgrep fd bat eza jq htop bottom ncdu duf rust-bindgen rustup ranger pavucontrol libqalculate flameshot
 
       # apps
       (gWrap.opengl telegram-desktop) (gWrap.opengl google-chrome)
