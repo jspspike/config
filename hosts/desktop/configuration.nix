@@ -2,7 +2,7 @@
 
 {
   imports =
-    [ ./hardware-configuration.nix ../../machine-modules/i3.nix ];
+    [ ./hardware-configuration.nix ../../machine-modules/i3.nix ../../machine-modules/common.nix ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -17,7 +17,6 @@
   programs = {
     zsh.enable = true;
     steam.enable = true;
-    firefox.enable = true;
   };
 
   # Set your time zone.
@@ -40,8 +39,10 @@
 
   services.xserver = {
     enable = true;
-    layout = "us";
-    xkbVariant = "";
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
   };
 
   # Enable CUPS to print documents.
@@ -72,8 +73,8 @@
   };
 
   # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "jspspike";
+  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.user = "jspspike";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

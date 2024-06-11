@@ -66,7 +66,7 @@ in {
     };
     zsh = {
       enable = true;
-      enableAutosuggestions = true;
+      autosuggestion.enable = true;
       enableCompletion = true;
       shellAliases = {
         "xopen" = "xdg-open";
