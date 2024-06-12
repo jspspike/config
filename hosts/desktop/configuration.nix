@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
@@ -69,7 +69,7 @@
     isNormalUser = true;
     description = "jspspike";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [ discord spotify ];
+    packages = with pkgs; [ discord spotify inputs.pineapple.packages.x86_64-linux.android-messages ];
   };
 
   # Enable automatic login for the user.

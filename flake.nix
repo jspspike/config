@@ -33,6 +33,15 @@
 
     # https://github.com/nix-community/nixGL/issues/154
     pinnedNixpkgs.url = "github:nixos/nixpkgs/6df37dc6a77654682fe9f071c62b4242b5342e04";
+
+    pineapple = {
+      url = "github:p1n3appl3/config";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+        ragenix.follows = "";
+      };
+    };
   };
 
   outputs = { nixpkgs, home-manager, nixgl, pinnedNixpkgs, self, ... } @ inputs:
