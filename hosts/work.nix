@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, nvidiaPackages, config, ... }:
+{ pkgs, lib, inputs, config, ... }:
 {
   home = {
     username = "jjohnson";

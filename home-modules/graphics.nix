@@ -1,4 +1,4 @@
-{ lib, pkgs, inputs, nvidiaPackages?null, config, ... }: let
+{ lib, pkgs, inputs, config, ... }: let
   cfg = config.jspspike.graphicsWrapper;
 in {
   options.jspspike.graphicsWrapper = {
@@ -63,14 +63,7 @@ in {
         inherit (pkg) version pname;
       };
 
-      # TODO: when this issue (https://github.com/nix-community/nixGL/issues/154)
-      # is resolved we can get rid of `nvidiaPackages` and just use the regular
-      # nixpkgs instance..
-      nvidia = let
-        nvidiaPackagesForDriverVersion = nvidiaPackages.nixgl.nvidiaPackages {
-          inherit (cfg) version sha256;
-        };
-      in with nvidiaPackagesForDriverVersion; {
+      nvidia = with inputs.nixgl.packages.${pkgs.system}; {
         opengl = nixGLNvidia;
         vulkan = nixVulkanNvidia;
       };

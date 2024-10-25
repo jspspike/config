@@ -50,7 +50,7 @@
       system = "x86_64-linux";
     };
     home = hostModule: home-manager.lib.homeManagerConfiguration {
-      extraSpecialArgs = { inherit inputs nvidiaPackages; };
+      extraSpecialArgs = { inherit inputs; };
       inherit pkgs;
       modules = [ ./home-modules/common.nix hostModule ];
     };
@@ -58,11 +58,6 @@
       specialArgs = { inherit inputs; };
       inherit system;
       modules = [ module ];
-    };
-    nvidiaPackages = import pinnedNixpkgs {
-      system = "x86_64-linux";
-      config.allowUnfree = true;
-      overlays = [ nixgl.overlay ];
     };
   in {
     homeConfigurations = {
