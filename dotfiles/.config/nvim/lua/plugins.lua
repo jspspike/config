@@ -48,7 +48,7 @@ end
 -- vim.lsp.set_log_level "debug"
 server "clangd"
 server "nil_ls"
-server "tsserver"
+server "ts_ls"
 server "gopls"
 
 vim.g.neoformat_nasm_nasmfmt = { exe = "nasmfmt", replace = 1 }
