@@ -355,22 +355,6 @@
         "type": "github"
       }
     },
-    "pinnedNixpkgs": {
-      "locked": {
-        "lastModified": 1703255338,
-        "narHash": "sha256-Z6wfYJQKmDN9xciTwU3cOiOk+NElxdZwy/FiHctCzjU=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "6df37dc6a77654682fe9f071c62b4242b5342e04",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "6df37dc6a77654682fe9f071c62b4242b5342e04",
-        "type": "github"
-      }
-    },
     "rahul-config": {
       "inputs": {
         "agenix": [
@@ -426,8 +410,7 @@
         "nix-index-database": "nix-index-database",
         "nixgl": "nixgl",
         "nixpkgs": "nixpkgs_2",
-        "pineapple": "pineapple",
-        "pinnedNixpkgs": "pinnedNixpkgs"
+        "pineapple": "pineapple"
       }
     },
     "slippi": {

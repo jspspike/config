@@ -1,6 +1,10 @@
 { pkgs, lib, inputs, config, ... }: let
-  gWrap = config.jspspike.graphicsWrapper.functions;
-in {
+  gWrap = config.lib.nixGL.wrap;
+in
+{
+  nixGL.packages = inputs.nixgl.packages;
+  nixGL.installScripts = [ "mesa" ];
+
   # Here's your list of packages, adding something to here and
   # rebuilding your config should be enough to make it available.
   home = {
@@ -12,7 +16,7 @@ in {
       ripgrep fd bat eza jq htop bottom ncdu duf rust-bindgen rustup ranger pavucontrol libqalculate flameshot
 
       # apps
-      (gWrap.opengl telegram-desktop) (gWrap.opengl google-chrome)
+      (gWrap telegram-desktop) (gWrap google-chrome)
 
       # some nix-specific tools
       nix home-manager nix-output-monitor nix-tree nil comma
@@ -45,7 +49,7 @@ in {
     };
     alacritty = {
       enable = true;
-      package = gWrap.opengl pkgs.alacritty;
+      package = gWrap pkgs.alacritty;
       settings = {
         font.size = lib.mkDefault 12.0;
         colors = {
