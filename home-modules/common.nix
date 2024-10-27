@@ -13,7 +13,7 @@ in
     stateVersion = "23.11";
     packages = with pkgs; [
       # utils
-      ripgrep fd bat eza jq htop bottom ncdu duf rust-bindgen rustup ranger pavucontrol libqalculate flameshot tree
+      ripgrep fd bat eza jq htop bottom ncdu duf rust-bindgen rustup ranger pavucontrol libqalculate flameshot tree zoxide
 
       # apps
       (gWrap telegram-desktop) (gWrap google-chrome)
@@ -79,6 +79,8 @@ in
         function rm {
           mv \"\${@}\" /tmp
         }\n
+
+        eval \"$(zoxide init --cmd j zsh)\"
       ";
       plugins = [
         {
