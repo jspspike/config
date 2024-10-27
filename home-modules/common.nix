@@ -104,6 +104,14 @@ in
 
   services = {
     clipmenu.enable = true;
+    syncthing = {
+      enable = true;
+      tray = { enable = true; command = "syncthingtray --wait"; };
+    };
+  };
+
+  systemd = {
+    user.startServices = "sd-switch";
   };
 
   xdg = {

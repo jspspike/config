@@ -3,10 +3,4 @@
   home = {
     packages = with pkgs; [ discord spotify inputs.pineapple.packages.x86_64-linux.android-messages ];
   };
-  programs = {
-  };
-
-  jspspike.graphicsWrapper = {
-    kind = "intel";
-  };
 }
