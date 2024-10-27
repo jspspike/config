@@ -13,7 +13,7 @@ in
     stateVersion = "23.11";
     packages = with pkgs; [
       # utils
-      ripgrep fd bat eza jq htop bottom ncdu duf rust-bindgen rustup ranger pavucontrol libqalculate flameshot
+      ripgrep fd bat eza jq htop bottom ncdu duf rust-bindgen rustup ranger pavucontrol libqalculate flameshot tree
 
       # apps
       (gWrap telegram-desktop) (gWrap google-chrome)
@@ -38,9 +38,6 @@ in
       }) (lib.filesystem.listFilesRecursive ../dotfiles));
   };
 
-  # this is the output that home-manager uses for "managed" stuff, when you want to start messing
-  # with that you can go to https://mipmip.github.io/home-manager-option-search and look under
-  # programs.<name> or services.<name> for all the relevant options.
   programs = {
     direnv = {
       enable = true;
@@ -56,6 +53,15 @@ in
           draw_bold_text_with_bright_colors = true;
         };
       };
+    };
+    kitty = {
+      enable = true;
+      package = gWrap pkgs.kitty;
+      settings = {
+        font_size = lib.mkDefault 12.0;
+        include = "~/config/dotfiles/kitty/common.conf";
+      };
+      shellIntegration.enableZshIntegration = true;
     };
     git = {
       enable = true;
@@ -108,9 +114,7 @@ in
     };
   };
 
-  # finally for stuff that runs as a daemon you'll want to look under the services option
   services = {
-    # records your clipboard history
     clipmenu.enable = true;
   };
 
@@ -142,7 +146,6 @@ in
 
   imports = [
     inputs.nix-index-database.hmModules.nix-index
-    ./graphics.nix
     ./nvim.nix
     # if you end up configuring stuff with home-manager it's helpful to stick related bits
     # in their own modules and you can organize them however you want. Those modules

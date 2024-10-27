@@ -17,8 +17,10 @@
         font.size = 10.0;
       };
     };
-  };
-  jspspike.graphicsWrapper = {
-    kind = "intel";
+    kitty = {
+      settings = {
+        font_size = 18.0;
+      };
+    };
   };
 }
