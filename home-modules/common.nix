@@ -44,16 +44,6 @@ in
       nix-direnv.enable = true;
       enableZshIntegration = true;
     };
-    alacritty = {
-      enable = true;
-      package = gWrap pkgs.alacritty;
-      settings = {
-        font.size = lib.mkDefault 12.0;
-        colors = {
-          draw_bold_text_with_bright_colors = true;
-        };
-      };
-    };
     kitty = {
       enable = true;
       package = gWrap pkgs.kitty;
@@ -83,11 +73,6 @@ in
         "vi" = "nvim";
         "ls" = "exa --oneline --long --icons";
       };
-      oh-my-zsh = {
-        enable = true;
-        plugins = [ "git" "sudo" ];
-        theme = "michelebologna";
-      };
       initExtra = "
         setxkbmap -option caps:escape\n
 
@@ -107,6 +92,9 @@ in
           };
         }
       ];
+    };
+    starship = {
+      enable = true;
     };
     fzf = {
       enable = true;
