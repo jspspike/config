@@ -13,7 +13,7 @@ in
     stateVersion = "23.11";
     packages = with pkgs; [
       # utils
-      ripgrep fd bat eza jq htop bottom ncdu duf rust-bindgen rustup ranger pavucontrol libqalculate flameshot tree zoxide
+      ripgrep fd bat eza jq htop bottom ncdu duf rust-bindgen rustup ranger pavucontrol libqalculate flameshot tree zoxide dtrx
 
       # apps
       (gWrap telegram-desktop) (gWrap google-chrome)

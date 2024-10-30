@@ -156,8 +156,8 @@ wk.add {
     { "<space><tab>", ":b#<CR>", desc = "Last Buffer" },
     { "<space>b", RUNFZF "buffers", desc = "Buffers" },
     { "<space>w", proxy = "<C-W>", desc = "+Window" },
-    { ",,", ",", desc = "Last match" },
-    { ",=", format, desc = "Format" },
+    { "<space>,,", ",", desc = "Last match" },
+    { "<space>,=", format, desc = "Format" },
 }
 
 local function fzf_g(command)
