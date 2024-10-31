@@ -113,7 +113,15 @@ in
   };
 
   systemd = {
-    user.startServices = "sd-switch";
+    user = {
+      startServices = "sd-switch";
+      targets.tray = {
+        Unit = {
+            Description = "Home Manager System Tray";
+            Requires = [ "graphical-session-pre.target" ];
+        };
+      };
+    };
   };
 
   xdg = {
