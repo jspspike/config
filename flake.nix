@@ -33,7 +33,7 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, nixgl, self, ... } @ inputs:
+  outputs = { nixpkgs, home-manager, self, ... } @ inputs:
     let
     pkgs = import nixpkgs {
       system = "x86_64-linux";
@@ -51,11 +51,11 @@
   in {
     homeConfigurations = {
       work = home ./hosts/work.nix;
-      laptop = home ./hosts/laptop.nix;
     };
 
     nixosConfigurations = {
       desktop = machine "x86_64-linux" ./hosts/desktop;
+      laptop = machine "x86_64-linux" ./hosts/laptop;
     };
 
     inherit pkgs;
