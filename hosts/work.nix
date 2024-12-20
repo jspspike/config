@@ -23,4 +23,6 @@
       };
     };
   };
+
+  imports = [ ../home-modules/i3.nix ];
 }
