@@ -118,11 +118,10 @@ for_window [class="Pavucontrol"] floating enable
 
 # Set shut down, restart and locking features
 bindsym $mod+0 mode "$mode_system"
-set $mode_system (l)ock, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+set $mode_system (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
     bindsym s exec --no-startup-id systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
+    bindsym h exec --no-startup-id systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id reboot now, mode "default"
     bindsym Shift+s exec --no-startup-id shutdown now, mode "default"
 
