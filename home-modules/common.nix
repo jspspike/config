@@ -7,7 +7,7 @@ in
   home = {
     username = lib.mkDefault "jspspike";
     homeDirectory = lib.mkDefault "/home/jspspike";
-    stateVersion = "23.11";
+    stateVersion = "24.11";
     packages = with pkgs; [
       # utils
       ripgrep fd bat eza jq htop bottom ncdu duf rust-bindgen rustup ranger pavucontrol libqalculate flameshot tree zoxide dtrx

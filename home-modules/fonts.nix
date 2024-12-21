@@ -1,5 +1,6 @@
 { pkgs, lib, ... }: {
   home.packages = with pkgs; [
+    font-awesome
     dejavu_fonts
     noto-fonts
     noto-fonts-cjk-sans

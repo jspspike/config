@@ -1,6 +1,6 @@
 { pkgs, lib, inputs, config, ... }:
 {
-  home.packages = with pkgs; [ dmenu xsel font-awesome ];
+  home.packages = with pkgs; [ dmenu xsel hsetroot ];
   xsession.windowManager.i3 = {
     enable = true;
 
@@ -162,6 +162,11 @@
         };
       }];
     };
+
+    extraConfig = ''
+      exec `setxkbmap -option caps:escape`
+      exec `hsetroot -solid '#5277C3'`
+    '';
   };
 
   programs = {
