@@ -151,6 +151,7 @@ in
   imports = [
     inputs.nix-index-database.hmModules.nix-index
     ./nvim.nix
+    ./fonts.nix
     # if you end up configuring stuff with home-manager it's helpful to stick related bits
     # in their own modules and you can organize them however you want. Those modules
     # get merged in a pretty elegant way, as a trivial example if you were to define
