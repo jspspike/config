@@ -181,7 +181,7 @@
           }
           {
             block = "net";
-            format = " $icon $speed_down - $speed_up : $ip ";
+            format = " $icon $ip ";
           }
           {
             block = "memory";
