@@ -2,6 +2,9 @@
   gWrap = config.lib.nixGL.wrap;
 in
 {
+  nixGL.packages = inputs.nixgl.packages;
+  nixGL.installScripts = [ "mesa" ];
+
   # Here's your list of packages, adding something to here and
   # rebuilding your config should be enough to make it available.
   home = {

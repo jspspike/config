@@ -33,7 +33,7 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, self, ... } @ inputs:
+  outputs = { nixpkgs, home-manager, nixgl, self, ... } @ inputs:
     let
     pkgs = import nixpkgs {
       system = "x86_64-linux";
