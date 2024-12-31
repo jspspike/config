@@ -6,6 +6,7 @@
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
     noto-fonts-emoji
+    nerd-fonts.symbols-only
     comic-neue
     inter
     mononoki
@@ -32,10 +33,10 @@
         "Noto Sans CJK JP"
       ];
       monospace = [
+        "DejaVu Sans Mono"
         "Noto Sans Symbols"
         "Noto Sans Symbols 2"
         "Symbols Nerd Font Mono"
-        "DejaVu Sans Mono"
         "Noto Sans Mono CJK JP"
         "Noto Sans Math"
       ];
