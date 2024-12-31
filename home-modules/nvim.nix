@@ -24,8 +24,6 @@
       dressing-nvim
       (gh "j-hui" "fidget.nvim" "0ba1e16d07627532b6cae915cc992ecac249fb97"
         "sha256-rmJgfrEr/PYBq0S7j3tzRZvxi7PMMaAo0k528miXOQc=")
-      (gh "Eandrju" "cellular-automaton.nvim" "b7d056dab963b5d3f2c560d92937cb51db61cb5b"
-        "sha256-szbd6m7hH7NFI0UzjWF83xkpSJeUWCbn9c+O8F8S/Fg=")
     # Programming
       nvim-surround
       comment-nvim
