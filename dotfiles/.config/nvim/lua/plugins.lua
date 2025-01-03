@@ -55,10 +55,6 @@ vim.g.neoformat_nasm_nasmfmt = { exe = "nasmfmt", replace = 1 }
 vim.g.neoformat_enabled_nasm = { "nasmfmt" }
 server("asm_lsp", { filetypes = { "nasm" } })
 
-vim.g.neoformat_typst_typstfmt = { exe = "typstfmt", replace = 1 }
-vim.g.neoformat_enabled_typst = { "typstfmt" }
-server("typst_lsp", { settings = { experimentalFormatterMode = "on" } })
-
 vim.g.neoformat_python_ruff = { exe = "ruff", args = { "format" }, replace = 1 }
 vim.g.neoformat_enabled_python = { "ruff" }
 server("pyright", {

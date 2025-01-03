@@ -88,8 +88,7 @@ end
 map("K", vim.lsp.buf.hover)
 
 G.lazy_load("fzf-lua", {
-    preview_layout = "vertical",
-    preview_vertical = "up",
+    winopts = { preview = { layout = "vertical", vertical = "up" } },
     keymap = { fzf = { ["ctrl-u"] = "half-page-up", ["ctrl-d"] = "half-page-down" } },
     files = { fd_opts = "-Htf --mount --color always" },
     grep = { rg_opts = "-S. --no-heading --color always" },

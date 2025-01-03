@@ -36,7 +36,6 @@
         git_config git_rebase gitcommit gitignore markdown markdown_inline
         gdscript wgsl wgsl_bevy beancount rasi yuck
       ] ++ [
-        pkgs.tree-sitter-grammars.tree-sitter-typst
         (pkgs.tree-sitter.buildGrammar rec {
           version = "v1.1.0"; language = "hypr";
           src = pkgs.fetchFromGitHub {
@@ -64,4 +63,7 @@
       treesj
     ];
   };
-in { config.programs.neovim = nvim-config; }
+in {
+  programs.neovim = nvim-config;
+  home.packages = with pkgs; [ lua-language-server ];
+}
