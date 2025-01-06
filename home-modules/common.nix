@@ -63,7 +63,7 @@ in
       extraConfig.pull.rebase = "true";
       extraConfig.merge.conflictstyle = "diff3";
       extraConfig.core.editor = "nvim";
-      ignores = ["shell.nix" ".envrc"];
+      ignores = ["shell.nix" ".envrc" ".direnv"];
     };
     zsh = {
       enable = true;
