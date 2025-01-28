@@ -65,5 +65,5 @@
   };
 in {
   programs.neovim = nvim-config;
-  home.packages = with pkgs; [ lua-language-server ];
+  home.packages = with pkgs; [ lua-language-server typescript-language-server ];
 }
