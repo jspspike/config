@@ -42,5 +42,11 @@
         };
       };
     };
+
+    libinput = {
+      mouse = {
+        accelProfile = "flat";
+      };
+    };
   };
 }
