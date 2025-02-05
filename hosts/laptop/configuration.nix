@@ -4,6 +4,10 @@
   imports =
     [ ./hardware-configuration.nix ../../machine-modules/i3.nix ../../machine-modules/common.nix ];
 
+  environment.extraInit = ''
+    xset s off -dpms
+  '';
+
   programs = {
     steam.enable = true;
   };

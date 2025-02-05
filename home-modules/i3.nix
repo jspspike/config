@@ -10,7 +10,7 @@
       defaultWorkspace = "workspace number 1";
 
       window = {
-        border = 2;
+        border = 1;
         titlebar = false;
         commands = [{
           command = "floating enable";
@@ -21,7 +21,7 @@
       };
 
       floating = {
-        border = 2;
+        border = 1;
         titlebar = false;
         modifier = modifier;
       };
