@@ -72,7 +72,7 @@ in
       shellAliases = {
         "xopen" = "xdg-open";
         "vi" = "nvim";
-        "ls" = "exa --oneline --long --icons";
+        "ls" = "exa --oneline --long --icons --all";
       };
       initExtra = "
         setxkbmap -option caps:escape\n

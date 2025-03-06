@@ -33,7 +33,7 @@ require "keybinds"
 vim.filetype.add { extension = { typ = "typst", nasm = "nasm" } }
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
-    pattern = { "markdown", "gitcommit" },
+    pattern = { "markdown", "gitcommit", "typescript" },
     callback = function()
         o.spell = true
         o.shiftwidth = 2

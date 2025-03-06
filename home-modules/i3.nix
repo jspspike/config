@@ -82,6 +82,7 @@
         "${modifier}+Shift+s" = "sticky toggle";
 
         "${modifier}+0" = "mode \"${mode_system}\"";
+        "${modifier}+r" = "mode \"resize\"";
       }
       # we need a formatter
       // builtins.listToAttrs ( map ( num:

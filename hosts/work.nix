@@ -12,14 +12,9 @@
       userName = "jjohnson";
       userEmail = "jjohnson@cloudflare.com";
     };
-    alacritty = {
-      settings = {
-        font.size = 10.0;
-      };
-    };
     kitty = {
       settings = {
-        font_size = 18.0;
+        font_size = 13.0;
       };
     };
     autorandr = {
