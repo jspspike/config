@@ -1,7 +1,6 @@
 vim.loader.enable()
 vim.g.mapleader = " "
 vim.g.loaded_perl_provider = 0
-vim.g.startuptime_exe_path = "nvim"
 vim.diagnostic.config { virtual_text = false, severity_sort = true }
 local o = vim.opt
 o.gdefault = true
@@ -26,27 +25,26 @@ o.shortmess:append "cI"
 require "util"
 require "pretty"
 require "statusline"
+
 require "plugins"
 require "completion"
+require "lsp"
+require "debugger"
+
 require "keybinds"
 
-vim.filetype.add { extension = { typ = "typst", nasm = "nasm" } }
+vim.filetype.add {
+    extension = { nasm = "nasm", nbt = "numbat", vasm = "vasm" },
+}
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
-    pattern = { "markdown", "gitcommit", "typescript" },
+    pattern = { "markdown", "gitcommit" },
     callback = function()
         o.spell = true
         o.shiftwidth = 2
         o.conceallevel = 2
     end,
 })
-
-MyFoldText = function()
-    -- stylua: ignore
-    return vim.fn.getline(vim.v.foldstart) .. "    ("
-        .. (vim.v.foldend - vim.v.foldstart) .. " lines) "
-end
-vim.opt.foldtext = "v:lua.MyFoldText()"
 
 require("osc52").setup { silent = true, trim = true, max_length = 2 ^ 16 }
 if vim.env.SSH_TTY then

@@ -1,6 +1,4 @@
 {
-  description = "An example config";
-
   nixConfig = {
     extra-substituters = [
       "https://colmena.cachix.org"

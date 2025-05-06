@@ -22,7 +22,7 @@ in
       nix home-manager nix-output-monitor nix-tree nil comma
     ];
     sessionVariables = {
-      WEE = "WOO"; # echo $WEE to check if it's working :P
+      WEE = "WOO";
       NIX_PATH = "nixpkgs=flake:nixpkgs";
       BROWSER = "${pkgs.google-chrome}/bin/google-chrome-stable";
       DEFAULT_BROWSER = "${pkgs.google-chrome}/bin/google-chrome-stable";

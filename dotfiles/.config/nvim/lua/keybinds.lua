@@ -1,10 +1,11 @@
 local modemap = vim.keymap.set
+local prompt = vim.fn.input
 local function map(lhs, rhs, opt) modemap("", lhs, rhs, opt) end
 
 -- search/replace
-modemap("n", ",/", ":nohl<CR>", { silent = true })
 modemap("n", "<C-/>", ":%s/")
 modemap("v", "<C-/>", ":s/")
+modemap("n", "<Esc>", ":nohl<CR>", { silent = true })
 
 -- system clipboard
 map("<C-y>", '"+y')
@@ -46,7 +47,7 @@ modemap("x", "<space>cb", visual_com "blockwise")
 modemap({ "n", "v" }, "<C-i>", "<C-i>", { noremap = true })
 local format = function()
     local bufnr = vim.api.nvim_get_current_buf()
-    for _, c in pairs(vim.lsp.get_active_clients { bufnr = bufnr }) do
+    for _, c in pairs(vim.lsp.get_clients { bufnr = bufnr }) do
         if c.supports_method "textDocument/formatting" then
             local t = vim.api.nvim_buf_get_changedtick(0)
             local name = "Language Server"
@@ -61,7 +62,7 @@ local format = function()
             return
         end
     end
-    vim.cmd [[ Neoformat ]]
+    vim.cmd [[Neoformat]]
 end
 
 local sev = vim.diagnostic.severity
@@ -85,7 +86,9 @@ local toggle_diagnostics = function()
     if diagnostics_active then d.show() else d.hide() end
 end
 
-map("K", vim.lsp.buf.hover)
+local toggle_inlay_hints = function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end
 
 G.lazy_load("fzf-lua", {
     winopts = { preview = { layout = "vertical", vertical = "up" } },
@@ -104,15 +107,19 @@ wk.setup {
         presets = { operators = false, motions = false, text_objects = false },
     },
     layout = { width = { max = 40 } },
+    icons = { rules = false },
 }
 
+local dap = require "dap"
 wk.add {
     { "<space>q", group = "Quit/Quickfix" },
     { "<space>qq", ":qa<CR>", desc = "Quit" },
     { "<space>qf", RUNFZF "quickfix", desc = "Quickfix" },
+
     { "<space>r", group = "Rename/Ripgrep" },
     { "<space>rn", vim.lsp.buf.rename, desc = "Rename" },
     { "<space>rg", RUNFZF "live_grep_native", desc = "Ripgrep" },
+
     { "<space>f", group = "Files" },
     { "<space>fs", ":w<CR>", desc = "Save" },
     { "<space>fS", ":wa<CR>", desc = "Save All" },
@@ -121,6 +128,7 @@ wk.add {
     { "<space>fh", RUNFZF "oldfiles", desc = "from history" },
     { "<space>fg", RUNFZF "git_files", desc = "from git" },
     { "<space>F", RUNFZF "files", desc = "Files" },
+
     { "<space>e", group = "Errors" },
     { "<space>ee", vim.diagnostic.open_float, desc = "Details" },
     { "<space>en", vim.diagnostic.goto_next, desc = "Next" },
@@ -130,6 +138,7 @@ wk.add {
     { "<space>et", toggle_diagnostics, desc = "Toggle" },
     { "<space>es", increase_min_severity, desc = "Less Noise" },
     { "<space>eS", decrease_min_severity, desc = "More Noise" },
+
     { "<space>g", group = "Git" },
     { "<space>gb", GITS.toggle_current_line_blame, desc = "Blame" },
     { "<space>gn", GITS.next_hunk, desc = "Next Hunk" },
@@ -139,6 +148,27 @@ wk.add {
     { "<space>gu", GITS.undo_stage_hunk, desc = "Undo Stage Hunk" },
     { "<space>gr", GITS.reset_hunk, desc = "Reset Hunk" },
     { "<space>G", RUNFZF "git_status", desc = "Git Status" },
+
+    { "<space>a", group = "Debug" },
+    { "<space>ad", dap.run_last, desc = "Run Last" },
+    { "<space>ab", dap.toggle_breakpoint, desc = "Toggle Breakpoint" },
+    -- stylua: ignore
+    { "<space>aB", desc = "Set conditional breakpoint",
+        function() dap.set_breakpoint(prompt "Breakpoint condition: ") end },
+    -- stylua: ignore
+    { "<space>al", desc = "Set logpoint",
+        function() dap.set_breakpoint(nil, nil, prompt "Log point message: ") end },
+    { "<space>a<space>", RUNFZF "dap_commands", desc = "Commands" },
+    { "<space>ac", dap.continue, desc = "Continue" },
+    { "<space>an", dap.step_over, desc = "Step Over" },
+    { "<space>as", dap.step_over, desc = "Step In" },
+    { "<space>af", dap.step_over, desc = "Step Out" },
+    { "<space>ar", dap.repl.toggle, desc = "Toggle Repl" },
+    { "<space>aS", require("dap-python").debug_selection, desc = "Debug Selection" },
+    { "<space>a<return>", dap.terminate, desc = "Choose Config" },
+    { "<space>ai", ":DapVirtualTextToggle<CR>", desc = "Toggle Virtual Text" },
+    { "<space>aq", dap.terminate, desc = "Close Session" },
+
     { "<space>t", RUNFZF "lsp_document_symbols", desc = "Symbols" },
     { "<space>T", RUNFZF "lsp_workspace_symbols", desc = "Workspace Symbols" },
     { "<space>;", vim.lsp.buf.signature_help, desc = "Signature Help" },
@@ -148,19 +178,22 @@ wk.add {
     { "<space>ca", RUNFZF "lsp_code_actions", desc = "Code Actions" },
     { "<space>s", RUNFZF "spell_suggest", desc = "Spelling" },
     { "<space>h", RUNFZF "help_tags", desc = "Help" },
+    { "<space>H", RUNFZF "highlights", desc = "Highlight" },
     { "<space>l", RUNFZF "lines", desc = "Search Lines" },
-    { "<space>i", ":RustToggleInlayHints<CR>", desc = "Inlay Hints" },
+    { "<space>i", toggle_inlay_hints, desc = "Inlay Hints" },
     { "<space>j", G.lazy("treesj", "toggle"), desc = "Split / Join" },
+
     { "<space>d", ":bd<CR>", desc = "Close Buffer" },
     { "<space><tab>", ":b#<CR>", desc = "Last Buffer" },
     { "<space>b", RUNFZF "buffers", desc = "Buffers" },
     { "<space>w", proxy = "<C-W>", desc = "+Window" },
-    { "<space>,,", ",", desc = "Last match" },
-    { "<space>,=", format, desc = "Format" },
+
+    { ",,", ",", desc = "Last match" },
+    { ",=", format, desc = "Format" },
 }
 
 local function fzf_g(command)
-    return G.lazy("fzf-lua", "lsp_" .. command, { jump_to_single_result = true })
+    return G.lazy("fzf-lua", "lsp_" .. command, { jump1 = true })
 end
 
 wk.add {
