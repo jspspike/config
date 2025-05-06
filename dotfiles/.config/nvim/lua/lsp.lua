@@ -9,7 +9,8 @@ end
 
 -- vim.lsp.set_log_level "debug"
 server "clangd"
-server "nil_ls"
+server "ts_ls"
+server "gopls"
 server("tinymist", {
     settings = { exportPdf = "onSave" },
     single_file_support = true,
