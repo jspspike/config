@@ -190,6 +190,7 @@ wk.add {
 
     { ",,", ",", desc = "Last match" },
     { ",=", format, desc = "Format" },
+    { ",/", ":nohlsearch<CR>", desc = "Clear search"}
 }
 
 local function fzf_g(command)

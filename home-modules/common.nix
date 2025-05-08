@@ -59,6 +59,9 @@ in
       userEmail = lib.mkDefault "jspspike@gmail.com";
       delta = {
         enable = true;
+        options = {
+          side-by-side = true;
+        };
       };
       extraConfig.pull.rebase = "true";
       extraConfig.merge.conflictstyle = "diff3";
