@@ -54,6 +54,7 @@
     nixosConfigurations = {
       desktop = machine "x86_64-linux" ./hosts/desktop;
       laptop = machine "x86_64-linux" ./hosts/laptop;
+      media = machine "x86_64-linux" ./hosts/media;
     };
 
     inherit pkgs;

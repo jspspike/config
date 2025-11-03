@@ -1,10 +1,9 @@
 require("neodev").setup {}
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local lspconfig = require "lspconfig"
 local function server(name, cfg)
-    lspconfig[name].setup(
-        vim.tbl_extend("error", cfg or {}, { capabilities = capabilities })
-    )
+    local cfg_final = vim.tbl_extend("error", cfg or {}, { capabilities = capabilities})
+    vim.lsp.config[name] = cfg_final
+    vim.lsp.enable(name)
 end
 
 -- vim.lsp.set_log_level "debug"
@@ -44,7 +43,7 @@ local ra_settings = {
         "inactive-code"
     } },
     completion = { callable = { snippets = "none" }, postfix = { enable = false } },
-    cargo = { cfgs = { miri = "true" } },
+    cargo = { cfgs = {"miri"} },
 }
 local ra_log = vim.fn.tempname() .. "-rust-analyzer.log"
 vim.g.rustaceanvim = {

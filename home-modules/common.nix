@@ -54,19 +54,23 @@ in
       shellIntegration.enableZshIntegration = true;
     };
     git = {
-      enable = true;
-      userName = lib.mkDefault "jspspike";
-      userEmail = lib.mkDefault "jspspike@gmail.com";
-      delta = {
-        enable = true;
-        options = {
-          side-by-side = true;
-        };
+      settings = {
+        user.name = lib.mkDefault "jspspike";
+        user.email = lib.mkDefault "jspspike@gmail.com";
+        pull.rebase = "true";
+        merge.conflictstyle = "diff3";
+        core.editor = "nvim";
       };
-      extraConfig.pull.rebase = "true";
-      extraConfig.merge.conflictstyle = "diff3";
-      extraConfig.core.editor = "nvim";
+      enable = true;
+
       ignores = ["shell.nix" ".envrc" ".direnv"];
+    };
+    delta = {
+      enable = true;
+      options = {
+        side-by-side = true;
+      };
+      enableGitIntegration = true;
     };
     zsh = {
       enable = true;
@@ -77,7 +81,7 @@ in
         "vi" = "nvim";
         "ls" = "exa --oneline --long --icons --all";
       };
-      initExtra = "
+      initContent = "
         setxkbmap -option caps:escape\n
 
         function rm {
@@ -140,6 +144,7 @@ in
         "x-scheme-handler/unknown" = "google-chrome.desktop";
       };
     };
+    configFile."mimeapps.list".force = true;
   };
 
   # when you use something like `nix run nixpkgs#htop`, the registry is where nix looks up
@@ -155,7 +160,7 @@ in
   };
 
   imports = [
-    inputs.nix-index-database.hmModules.nix-index
+    inputs.nix-index-database.homeModules.nix-index
     ./nvim.nix
     ./fonts.nix
     # if you end up configuring stuff with home-manager it's helpful to stick related bits
