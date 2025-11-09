@@ -51,3 +51,5 @@ vim.g.rustaceanvim = {
     tools = { inlay_hints = { auto = false } },
     server = { default_settings = { ["rust-analyzer"] = ra_settings }, logfile = ra_log },
 }
+
+server "nil_ls"
