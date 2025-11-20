@@ -125,7 +125,7 @@
         };
       };
 
-      bars = [{
+      bars = lib.mkDefault [{
         command = "i3bar";
         statusCommand = "i3status-rs ~/.config/i3status-rust/config-primary.toml";
         position = "bottom";
