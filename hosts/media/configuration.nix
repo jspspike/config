@@ -1,4 +1,8 @@
 { config, pkgs, inputs, lib, ... }:
+
+let
+  androidMessages = pkgs.callPackage "${inputs.pineapple}/pkgs/android-messages.nix" {};
+in
 { imports = [ ./hardware-configuration.nix ../../machine-modules/i3.nix ../../machine-modules/common.nix ../../machine-modules/ssh.nix ]; environment.extraInit = ''
     autorandr --change
     xset s off -dpms
@@ -8,7 +12,7 @@
     steam.enable = true;
   };
 
-  users.users.jspspike.packages = with pkgs; [ discord spotify ];
+  users.users.jspspike.packages = with pkgs; [ discord spotify androidMessages ];
 
   services = {
     libinput = {

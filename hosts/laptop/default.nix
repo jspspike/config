@@ -1,6 +1,11 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
+let
+  androidMessages = pkgs.callPackage "${inputs.pineapple}/pkgs/android-messages.nix" {};
+in
 {
   imports = [ ./configuration.nix inputs.home-manager.nixosModules.home-manager  ];
+
+  users.users.jspspike.packages = with pkgs; [ discord spotify androidMessages ];
 
   nix.settings.extra-experimental-features = [ "flakes" "nix-command" ];
 

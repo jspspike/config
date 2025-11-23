@@ -25,6 +25,7 @@
         assigns = {
           "2" = [
             { app_id = "org.telegram.desktop"; }
+            { title = "Android Messages"; }
           ];
         };
         workspaceOutputAssign = [
