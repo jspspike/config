@@ -38,15 +38,6 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  services.xserver = {
-    enable = true;
-    xkb = {
-      layout = "us";
-      variant = "";
-      options = "caps:escape";
-    };
-  };
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -70,7 +61,7 @@
   users.users.jspspike = {
     isNormalUser = true;
     description = "jspspike";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "video" ];
   };
 
   # Enable automatic login for the user.

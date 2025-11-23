@@ -82,8 +82,6 @@ in
         "ls" = "exa --oneline --long --icons --all";
       };
       initContent = "
-        setxkbmap -option caps:escape\n
-
         function rm {
           mv \"\${@}\" /tmp
         }\n
