@@ -6,6 +6,16 @@
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
-    users.jspspike.imports = [ ../../home-modules/common.nix ../../home-modules/i3.nix ];
+    users.jspspike.imports = [ ../../home-modules/common.nix ../../home-modules/sway.nix ];
+    users.jspspike = {
+      wayland.windowManager.sway.config = {
+        output = {
+          HDMI-A-2 = {
+            mode = "1920x1080@120Hz";
+            background = "#2F4970 solid_color";
+          };
+        };
+      };
+    };
   };
 }

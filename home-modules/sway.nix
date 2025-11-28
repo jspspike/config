@@ -123,6 +123,13 @@ window {
         size = 9.0;
       };
 
+      assigns = {
+        "2" = [
+          { app_id = "org.telegram.desktop"; }
+          { title = "Android Messages"; }
+        ];
+      };
+
       keybindings = let workspaces = [1 2 3 4 5 6 7 8]; in {
         "${modifier}+Return" = "exec kitty";
 
