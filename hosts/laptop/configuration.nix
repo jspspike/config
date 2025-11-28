@@ -2,7 +2,7 @@
 
 {
   imports =
-    [ ./hardware-configuration.nix ../../machine-modules/i3.nix ../../machine-modules/common.nix ];
+    [ ./hardware-configuration.nix ../../machine-modules/sway.nix ../../machine-modules/common.nix ];
 
   environment.extraInit = ''
     xset s off -dpms
