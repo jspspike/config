@@ -2,11 +2,7 @@
 
 {
   imports =
-    [ ./hardware-configuration.nix ../../machine-modules/sway.nix ../../machine-modules/common.nix ];
-
-  environment.extraInit = ''
-    xset s off -dpms
-  '';
+    [ ./hardware-configuration.nix ../../machine-modules/sway.nix ../../machine-modules/common.nix ../../secrets/config.nix ];
 
   programs = {
     steam.enable = true;

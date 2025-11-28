@@ -1,10 +1,6 @@
 { config, pkgs, inputs, lib, ... }:
 
-{ imports = [ ./hardware-configuration.nix ../../machine-modules/sway.nix ../../machine-modules/common.nix ../../machine-modules/ssh.nix ]; environment.extraInit = ''
-    autorandr --change
-    xset s off -dpms
-  '';
-
+{ imports = [ ./hardware-configuration.nix ../../machine-modules/sway.nix ../../machine-modules/common.nix ../../machine-modules/ssh.nix ../../secrets/config.nix ./ddns.nix ];
   programs = {
     steam.enable = true;
   };

@@ -29,9 +29,14 @@
         ragenix.follows = "";
       };
     };
+
+    ragenix = {
+      url = "github:yaxitech/ragenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, nixgl, self, ... } @ inputs:
+  outputs = { nixpkgs, home-manager, nixgl, self, ragenix, ... } @ inputs:
     let
     pkgs = import nixpkgs {
       system = "x86_64-linux";
@@ -39,12 +44,12 @@
     home = hostModule: home-manager.lib.homeManagerConfiguration {
       extraSpecialArgs = { inherit inputs; };
       inherit pkgs;
-      modules = [ ./home-modules/common.nix hostModule ];
+      modules = [ ./home-modules/common.nix hostModule ragenix.homeManagerModules.default ];
     };
     machine = system: module: nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       inherit system;
-      modules = [ module ];
+      modules = [ module ragenix.nixosModules.default ];
     };
   in {
     homeConfigurations = {
@@ -59,13 +64,6 @@
 
     inherit pkgs;
 
-    # If you find some program you want in your config and it's not in nixpkgs, it's
-    # usually not too hard to follow the build instructions for it and create your own
-    # little package. Maybe it's a little more effort than cargo install or git
-    # clone+configure+make install but on the bright side it's pretty much guaranteed to
-    # stay working whereas your unmanaged self-built binaries would be a pain to keep up
-    # to date or move to a new machine. I used nix-init to stick some random stuff in
-    # there as an example.
     packages.x86_64-linux = nixpkgs.lib.packagesFromDirectoryRecursive {
       callPackage = pkgs.callPackage; directory = ./pkgs;
     };

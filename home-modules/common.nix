@@ -13,7 +13,7 @@ in
     stateVersion = "24.11";
     packages = with pkgs; [
       # utils
-      ripgrep fd bat eza jq htop bottom ncdu duf rust-bindgen rustup ranger pavucontrol libqalculate flameshot tree zoxide dtrx
+      ripgrep fd bat eza jq htop bottom ncdu duf rust-bindgen rustup ranger pavucontrol libqalculate flameshot tree zoxide dtrx ragenix
 
       # apps
       (gWrap telegram-desktop) (gWrap google-chrome)
@@ -26,6 +26,7 @@ in
       NIX_PATH = "nixpkgs=flake:nixpkgs";
       BROWSER = "${pkgs.google-chrome}/bin/google-chrome-stable";
       DEFAULT_BROWSER = "${pkgs.google-chrome}/bin/google-chrome-stable";
+      EDITOR = "nvim";
     };
     file = builtins.listToAttrs (map (path:
       let f = lib.strings.removePrefix (inputs.self + "/dotfiles/") (toString path);
