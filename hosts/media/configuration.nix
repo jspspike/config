@@ -1,6 +1,6 @@
 { config, pkgs, inputs, lib, ... }:
 
-{ imports = [ ./hardware-configuration.nix ../../machine-modules/sway.nix ../../machine-modules/common.nix ../../machine-modules/ssh.nix ../../secrets/config.nix ./ddns.nix ];
+{ imports = [ ./hardware-configuration.nix ../../machine-modules/sway.nix ../../machine-modules/common.nix ../../machine-modules/ssh.nix ../../secrets/config.nix ./ddns.nix ./dns.nix ];
   programs = {
     steam.enable = true;
   };

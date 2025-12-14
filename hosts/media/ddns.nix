@@ -1,5 +1,4 @@
-
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, ... }:
 
 {
   systemd = {
