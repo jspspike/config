@@ -52,4 +52,4 @@ update_ddns() {
     fi
 }
 
-update_ddns "$CF_API_TOKEN_PATH" "318ddaa36236b5d86906b3536543df13" "home.weewoo.dev"
+update_ddns "$CF_API_TOKEN_PATH" "05de605ac8bcd6a0ef6f4c033820ce42" "home.weewoo.dev"
