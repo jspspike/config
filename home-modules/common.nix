@@ -88,6 +88,7 @@ in
         }\n
 
         eval \"$(zoxide init --cmd j zsh)\"
+        bindkey -e
       ";
       plugins = [
         {
