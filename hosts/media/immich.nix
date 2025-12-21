@@ -17,4 +17,16 @@
       };
     };
   };
+
+  services.nginx.virtualHosts = {
+    "photos.weewoo.dev" = {
+      # Serve HTTP (port 80)
+      listen = [ { addr = "0.0.0.0"; port = 80; } ];
+
+      # Reverse proxy settings
+      locations."/" = {
+        proxyPass = "http://localhost:2283";
+      };
+    };
+  };
 }

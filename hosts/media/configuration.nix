@@ -22,5 +22,14 @@
         accelProfile = "flat";
       };
     };
+    nginx = {
+      enable = true;
+    };
+  };
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 53 80 ];
+    allowedUDPPorts = [ 53 80 ];
   };
 }
