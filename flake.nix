@@ -47,7 +47,7 @@
       modules = [ ./home-modules/common.nix hostModule ragenix.homeManagerModules.default ];
     };
     machine = system: module: nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
+      specialArgs = { inherit inputs self; };
       inherit system;
       modules = [ module ragenix.nixosModules.default ];
     };

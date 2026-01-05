@@ -2,7 +2,12 @@
 
 {
   imports =
-    [ ./hardware-configuration.nix ../../machine-modules/common.nix ../../machine-modules/sway.nix ];
+    [ ./hardware-configuration.nix
+    ../../machine-modules/common.nix
+    ../../machine-modules/sway.nix
+    ../../secrets/config.nix
+    ./rustic-server.nix
+  ];
 
   programs = {
     steam.enable = true;
@@ -18,5 +23,10 @@
         accelProfile = "flat";
       };
     };
+  };
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 8000 ];
   };
 }
