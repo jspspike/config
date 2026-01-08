@@ -8,4 +8,5 @@ in {
     group = "rustic";
     mode = "0400";
   };
+  "rustic-env-var" = { file = ./rustic-env-var.age; };
 }

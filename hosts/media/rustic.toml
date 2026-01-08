@@ -1,0 +1,15 @@
+[repository]
+#[repository.options]
+#throttle = "5kB"
+
+[forget]
+keep-daily = 14
+keep-weekly = 5
+
+[[backup.snapshots]]
+name = "notes"
+sources = ["/home/jspspike/Documents/notes"]
+
+[[backup.snapshots]]
+name = "images"
+sources = ["/var/lib/immich"]

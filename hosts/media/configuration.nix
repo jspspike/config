@@ -9,6 +9,7 @@
     ./ddns.nix
     ./dns.nix
     ./immich.nix
+    ./rustic.nix
   ];
   programs = {
     steam.enable = true;

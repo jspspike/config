@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, self, ... }:
+{ config, self, ... }:
 {
   systemd.services.rustic-server = {
     description = "Rustic Backup Server";
