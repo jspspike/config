@@ -9,7 +9,11 @@
 
       server = ["1.1.1.1"];
 
-      address = [ "/home.weewoo.dev/192.168.0.117" "/photos.weewoo.dev/192.168.0.117" ];
+      address = [
+        "/home.weewoo.dev/192.168.0.117"
+        "/photos.weewoo.dev/192.168.0.117"
+        "/desktop.weewoo.dev/192.168.0.58"
+      ];
 
       no-resolv = true;
       resolv-file = "/etc/dnsmasq-resolv.conf";
