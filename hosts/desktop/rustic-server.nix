@@ -1,29 +1,19 @@
 { config, self, ... }:
+
 {
-  systemd.services.rustic-server = {
-    description = "Rustic Backup Server";
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
+  services.rustic-server = {
+    enable = true;
 
-    serviceConfig = {
-      ExecStart = "${self.packages.x86_64-linux.rustic-server}/bin/rustic-server serve --acl-path ${./acl.toml} --htpasswd-file ${config.age.secrets.rustic-htpasswd.path} --private-repos --listen 0.0.0.0:8000 --path \"/var/lib/rustic/backup\" ";
+    # Optional: Override the package if you want the specific one from your flake inputs
+    package = self.packages.x86_64-linux.rustic-server;
 
-      Restart = "always";
-      User = "rustic";
-      Group = "rustic";
+    # Configuration
+    listenAddress = "0.0.0.0";
+    port = 8000;
+    dataDir = "/var/lib/rustic/backup";
 
-      # Security Sandboxing
-      StateDirectory = "rustic";
-      ProtectSystem = "full";
-      NoNewPrivileges = true;
-      PrivateTmp = true;
-    };
+    # File paths
+    aclFile = ./acl.toml;
+    htpasswdFile = config.age.secrets.rustic-htpasswd.path;
   };
-
-  # Define the user if it doesn't exist
-  users.users.rustic = {
-    isSystemUser = true;
-    group = "rustic";
-  };
-  users.groups.rustic = {};
 }

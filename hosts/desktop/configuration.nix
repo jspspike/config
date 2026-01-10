@@ -6,6 +6,7 @@
     ../../machine-modules/common.nix
     ../../machine-modules/sway.nix
     ../../secrets/config.nix
+    ../../machine-modules/rustic-server.nix
     ./rustic-server.nix
   ];
 
