@@ -1,11 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
-  # Create a directory containing 'myprofile.toml'
-  rusticConfigDir = pkgs.runCommand "rustic-config" {} ''
-    mkdir -p $out
-    cp ${./rustic.toml} $out/myprofile.toml
-  '';
+  getProfileName = path: lib.removeSuffix ".toml" (toString path);
 in
 {
   systemd.services.rustic-backup = {
@@ -19,8 +15,7 @@ in
       Type = "oneshot";
       User = "root";
       Group = "immich";
-      EnvironmentFile = "${config.age.secrets.rustic-env-var.path}";
-      ExecStart = "${pkgs.rustic}/bin/rustic backup -P  ${rusticConfigDir}/myprofile --password \"\"";
+      ExecStart = "${pkgs.rustic}/bin/rustic backup -P  ${getProfileName config.age.secrets.rustic-desktop-conf.path}";
 
       # Security Hardening
       PrivateTmp = true;

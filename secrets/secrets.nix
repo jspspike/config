@@ -14,5 +14,8 @@ in {
     group = "rustic";
     mode = "0400";
   };
-  "rustic-env-var" = { file = ./rustic-env-var.age; };
+  "rustic-desktop-conf" = {
+    file = ./rustic-desktop-conf.age;
+    name = "desktop.toml";
+  };
 }
