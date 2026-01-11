@@ -67,7 +67,7 @@ in
             "--path ${cfg.dataDir}"
             "--acl-path ${cfg.aclFile}"
             "--htpasswd-file ${cfg.htpasswdFile}"
-            "--private-repos" # You can also make this an option if you wish
+            "--private-repos"
           ] ++ cfg.extraArgs
         );
 
@@ -78,7 +78,9 @@ in
         # Security & Sandboxing
         # If the dataDir is the default, StateDirectory handles creation/permissions.
         # If it's custom, we assume the user manages the path or we need ReadWritePaths.
-        StateDirectory = mkIf (cfg.dataDir == "/var/lib/rustic") "rustic";
+        StateDirectory = mkIf (lib.hasPrefix "/var/lib/" cfg.dataDir) (lib.removePrefix "/var/lib/" cfg.dataDir);
+        # 2. If it's a custom path (like /mnt/storage), we must explicitly open the sandbox
+        ReadWritePaths = mkIf (!lib.hasPrefix "/var/lib/" cfg.dataDir) [ cfg.dataDir ];
 
         ProtectSystem = "full";
         NoNewPrivileges = true;

@@ -13,6 +13,6 @@
 
     # File paths
     aclFile = ./acl.toml;
-    htpasswdFile = config.age.secrets.rustic-desktop-htpasswd.path;
+    htpasswdFile = config.age.secrets.rustic-media-htpasswd.path;
   };
 }

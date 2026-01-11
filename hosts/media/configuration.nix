@@ -10,6 +10,8 @@
     ./dns.nix
     ./immich.nix
     ./rustic.nix
+    ./rustic-server.nix
+    ../../machine-modules/rustic-server.nix
   ];
   programs = {
     steam.enable = true;
@@ -30,7 +32,7 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 53 80 ];
+    allowedTCPPorts = [ 53 80 8000 ];
     allowedUDPPorts = [ 53 80 ];
   };
 }
