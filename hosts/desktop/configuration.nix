@@ -26,8 +26,26 @@
     };
   };
 
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ 8000 ];
+  networking = {
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [ 8000 ];
+    };
+
+    networkmanager = {
+      enable = true;
+      wifi.powersave = false;
+
+      settings = {
+        device = {
+          "wifi.scan-rand-mac-address" = "no";
+        };
+
+        connection = {
+          "wifi.cloned-mac-address" = "permanent";
+          "ethernet.cloned-mac-address" = "permanent";
+        };
+      };
+    };
   };
 }
