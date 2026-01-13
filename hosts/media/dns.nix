@@ -11,8 +11,8 @@
 
       address = [
         "/home.weewoo.dev/192.168.0.117"
-        "/photos.weewoo.dev/192.168.0.117"
-        "/photos.weewoo.dev/::"
+        #"/photos.weewoo.dev/192.168.0.117"
+        #"/photos.weewoo.dev/::"
         "/desktop.weewoo.dev/192.168.0.58"
 
         "/bedroom.light/192.168.0.101"
