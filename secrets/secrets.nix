@@ -18,4 +18,5 @@ in {
     file = ./rustic-desktop-conf.age;
     name = "desktop.toml";
   };
+  "wg-private-laptop" = { file = ./wg-private-laptop.age; };
 }

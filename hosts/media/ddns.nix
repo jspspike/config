@@ -10,7 +10,7 @@
         StandardOutput = "journal";
       };
       environment = {
-        CF_API_TOKEN_PATH= config.age.secrets.cloudflare-token.path;
+        CF_API_TOKEN_PATH = config.age.secrets.cloudflare-token.path;
       };
       path = with pkgs; [ curl jq ];
     };
