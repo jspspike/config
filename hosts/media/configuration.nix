@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, lib, ... }:
+{ config, pkgs, inputs, self, ... }:
 
 { imports = [
     ./hardware-configuration.nix
@@ -10,8 +10,8 @@
     ./dns.nix
     ./immich.nix
     ./rustic.nix
-    ./rustic-server.nix
     ../../machine-modules/rustic-server.nix
+    ../../machine-modules/mullvad.nix
   ];
   programs = {
     steam.enable = true;
@@ -25,9 +25,36 @@
         accelProfile = "flat";
       };
     };
+
     nginx = {
       enable = true;
     };
+
+    # Calm Hare
+    mullvad-netns = {
+      enable = true;
+      privateKeyFile = config.age.secrets.wg-private-media.path;
+      addressV4 = "10.67.82.6/32";
+      addressV6 = "fc00:bbbb:bbbb:bb01::4:5205/128";
+      dnsIp = "100.64.0.5";
+      peerPublicKey = "7v5alccqwh+9jA+hRqwc1uZIEebXs9g5i/jH29Gr5k0=";
+      endpoint = "206.217.206.16:51820";
+    };
+
+    rustic-server = {
+      enable = true;
+
+      package = self.packages.x86_64-linux.rustic-server;
+      # Configuration
+      listenAddress = "0.0.0.0";
+      port = 8000;
+      dataDir = "/var/lib/rustic/backup";
+
+      # File paths
+      aclFile = ./acl.toml;
+      htpasswdFile = config.age.secrets.rustic-media-htpasswd.path;
+    };
+
   };
 
   networking = {

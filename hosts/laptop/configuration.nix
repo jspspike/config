@@ -15,7 +15,7 @@
 
   users.users.jspspike.packages = with pkgs; [ discord spotify inputs.pineapple.packages.x86_64-linux.android-messages ];
 
-  # major elk
+  # Major Elk
   services.mullvad-netns = {
     enable = true;
     privateKeyFile = config.age.secrets.wg-private-laptop.path;

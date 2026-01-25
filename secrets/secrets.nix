@@ -19,4 +19,5 @@ in {
     name = "desktop.toml";
   };
   "wg-private-laptop" = { file = ./wg-private-laptop.age; };
+  "wg-private-media" = { file = ./wg-private-media.age; };
 }
