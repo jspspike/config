@@ -31,11 +31,13 @@ in {
 
     peerPublicKey = mkOption {
       type = types.str;
+      default = "7v5alccqwh+9jA+hRqwc1uZIEebXs9g5i/jH29Gr5k0=";
       description = "The WireGuard public key of the server.";
     };
 
     endpoint = mkOption {
       type = types.str;
+      default = "206.217.206.16:51820";
       description = "The server endpoint (IP:PORT).";
     };
   };

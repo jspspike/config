@@ -20,4 +20,5 @@ in {
   };
   "wg-private-laptop" = { file = ./wg-private-laptop.age; };
   "wg-private-media" = { file = ./wg-private-media.age; };
+  "wg-private-desktop" = { file = ./wg-private-desktop.age; };
 }
