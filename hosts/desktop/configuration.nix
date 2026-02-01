@@ -60,6 +60,7 @@
     networkmanager = {
       enable = true;
       wifi.powersave = false;
+      unmanaged = [ "wlp3s0" ];
 
       settings = {
         device = {
