@@ -4,7 +4,7 @@
     username = "jjohnson";
     homeDirectory = "/home/jjohnson";
     packages = with pkgs; [
-      tcpflow
+      tcpflow opencode
     ];
   };
   programs = {
