@@ -1,6 +1,6 @@
 vim.cmd [[ colorscheme custom ]]
 
-require("image").setup()
+--require("image").setup()
 require("colorizer").setup { user_default_options = { names = false } }
 require("gitsigns").setup { current_line_blame_opts = { delay = 500 } }
 vim.api.nvim_create_user_command("Dismiss", require("notify").dismiss, {})

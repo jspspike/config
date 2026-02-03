@@ -22,7 +22,7 @@
     nixgl.url = "github:guibou/nixGL";
 
     pineapple = {
-      url = "github:p1n3appl3/config";
+      url = "github:p1n3appl3/config/1fb0ec1951791f75f4812680a2f79219508cdcc1";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         home-manager.follows = "home-manager";
