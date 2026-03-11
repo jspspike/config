@@ -5,7 +5,7 @@ let
 in
 {
   systemd.services.rustic-backup = {
-    description = "Periodic Rustic backupta";
+    description = "Periodic Rustic backup";
 
     # Ensure the service only starts if the network is up
     after = [ "network-online.target" ];
@@ -15,12 +15,26 @@ in
       Type = "oneshot";
       User = "root";
       Group = "immich";
-      ExecStart = "${pkgs.rustic}/bin/rustic backup -P  ${getProfileName config.age.secrets.rustic-desktop-conf.path}";
 
       # Security Hardening
       PrivateTmp = true;
       ProtectSystem = "full";
     };
+
+    script = ''
+      set +e
+
+      ${pkgs.rustic}/bin/rustic backup -P ${getProfileName config.age.secrets.rustic-david-conf.path}
+      s1=$?
+
+      ${pkgs.rustic}/bin/rustic backup -P ${getProfileName config.age.secrets.rustic-desktop-conf.path}
+      s2=$?
+
+      if [ "$s1" -ne 0 ] || [ "$s2" -ne 0 ]; then
+        echo "rustic backup failed: david=$s1 desktop=$s2" >&2
+        exit 1
+      fi
+    '';
   };
 
   # 2. Define the Timer

@@ -18,6 +18,10 @@ in {
     file = ./rustic-desktop-conf.age;
     name = "desktop.toml";
   };
+  "rustic-david-conf" = {
+    file = ./rustic-david-conf.age;
+    name = "david.toml";
+  };
   "wg-private-laptop" = { file = ./wg-private-laptop.age; };
   "wg-private-media" = { file = ./wg-private-media.age; };
   "wg-private-desktop" = { file = ./wg-private-desktop.age; };
