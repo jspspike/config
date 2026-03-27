@@ -1,10 +1,8 @@
-{ pkgs, lib, inputs, config, ... }:
+{ pkgs, lib, inputs, config, self, ... }:
 {
   home.packages = with pkgs; [
-    grim # screenshot functionality
-    slurp # screenshot functionality
     wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
-    mako # notification system developed by swaywm maintainer
+    self.packages.x86_64-linux.sway-screenshot
   ];
 
   programs = {
@@ -26,7 +24,6 @@ window {
     border: 2px solid #454947; /* separator */
     border-radius: 8px;
     padding: 10px;
-    width: 400px;
 }
 
 /* Input box */

@@ -42,7 +42,7 @@
       system = "x86_64-linux";
     };
     home = hostModule: home-manager.lib.homeManagerConfiguration {
-      extraSpecialArgs = { inherit inputs; };
+      extraSpecialArgs = { inherit inputs self; };
       inherit pkgs;
       modules = [ ./home-modules/common.nix hostModule ragenix.homeManagerModules.default ];
     };
@@ -69,4 +69,3 @@
     };
   };
 }
-

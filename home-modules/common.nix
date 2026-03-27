@@ -13,7 +13,7 @@ in
     stateVersion = "24.11";
     packages = with pkgs; [
       # utils
-      ripgrep fd bat eza jq htop bottom ncdu duf rust-bindgen rustup ranger pavucontrol libqalculate flameshot tree zoxide dtrx ragenix
+      ripgrep fd bat eza jq htop bottom ncdu duf rust-bindgen rustup ranger pavucontrol libqalculate flameshot tree zoxide dtrx ragenix codex
 
       # apps
       (gWrap telegram-desktop) (gWrap google-chrome)
@@ -86,7 +86,6 @@ in
         function rm {
           mv \"\${@}\" /tmp
         }\n
-
         eval \"$(zoxide init --cmd j zsh)\"
         bindkey -e
       ";
