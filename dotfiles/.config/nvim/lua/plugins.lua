@@ -18,3 +18,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
 
 -- stylua: ignore
 require("treesitter-context").setup { patterns = { python = { "if", "elif" } } }
+
+-- markdown-preview.nvim
+vim.g.mkdp_auto_close = 0
+vim.g.mkdp_theme = "light"

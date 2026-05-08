@@ -2,8 +2,8 @@
   gWrap = config.lib.nixGL.wrap;
 in
 {
-  nixGL.packages = inputs.nixgl.packages;
-  nixGL.installScripts = [ "mesa" ];
+  targets.genericLinux.nixGL.packages = inputs.nixgl.packages;
+  targets.genericLinux.nixGL.installScripts = [ "mesa" ];
 
   # Here's your list of packages, adding something to here and
   # rebuilding your config should be enough to make it available.
@@ -63,6 +63,7 @@ in
         core.editor = "nvim";
       };
       enable = true;
+      signing.format = "openpgp";
 
       ignores = ["shell.nix" ".envrc" ".direnv"];
     };

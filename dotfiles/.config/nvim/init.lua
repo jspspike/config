@@ -39,10 +39,14 @@ vim.filetype.add {
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
     pattern = { "markdown", "gitcommit" },
-    callback = function()
+    callback = function(args)
         o.spell = true
         o.shiftwidth = 2
         o.conceallevel = 2
+        if args.match == "markdown" then
+            vim.keymap.set("n", "<space>mp", "<cmd>MarkdownPreviewToggle<CR>",
+                { buffer = args.buf, desc = "Markdown Preview Toggle" })
+        end
     end,
 })
 
