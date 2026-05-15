@@ -1,11 +1,11 @@
-{ inputs, pkgs, ... }:
+{ inputs, self, ... }:
 {
   imports = [ ./configuration.nix inputs.home-manager.nixosModules.home-manager  ];
 
   nix.settings.extra-experimental-features = [ "flakes" "nix-command" ];
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit inputs self; };
     users.jspspike.imports = [ ../../home-modules/common.nix ../../home-modules/sway.nix ];
     users.jspspike = {
       wayland.windowManager.sway.config = {
