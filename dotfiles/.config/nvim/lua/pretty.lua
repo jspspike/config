@@ -21,7 +21,7 @@ autocmd("TextYankPost", function() vim.highlight.on_yank { timeout = 150 } end)
 -- highlight lsp references
 autocmd({ "CursorHold", "CursorHoldI" }, function()
     for _, c in pairs(vim.lsp.get_clients()) do
-        if c.supports_method "textDocument/documentHighlight" then
+        if c:supports_method "textDocument/documentHighlight" then
             vim.lsp.buf.document_highlight()
         end
     end

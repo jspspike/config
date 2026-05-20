@@ -48,7 +48,7 @@ modemap({ "n", "v" }, "<C-i>", "<C-i>", { noremap = true })
 local format = function()
     local bufnr = vim.api.nvim_get_current_buf()
     for _, c in pairs(vim.lsp.get_clients { bufnr = bufnr }) do
-        if c.supports_method "textDocument/formatting" then
+        if c:supports_method "textDocument/formatting" then
             local t = vim.api.nvim_buf_get_changedtick(0)
             local name = "Language Server"
             if c.name ~= "" then name = c.name end
@@ -94,7 +94,7 @@ G.lazy_load("fzf-lua", {
     winopts = { preview = { layout = "vertical", vertical = "up" } },
     keymap = { fzf = { ["ctrl-u"] = "half-page-up", ["ctrl-d"] = "half-page-down" } },
     files = { fd_opts = "-Htf --mount --color always" },
-    grep = { rg_opts = "-S. --no-heading --color always" },
+    grep = { rg_opts = "-S. --no-heading --column --line-number --color always" },
 })
 RUNFZF = function(command, args) return G.lazy("fzf-lua", command, args) end
 
