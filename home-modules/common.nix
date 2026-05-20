@@ -64,8 +64,6 @@ in
       };
       enable = true;
       signing.format = "openpgp";
-
-      ignores = ["shell.nix" ".envrc" ".direnv"];
     };
     delta = {
       enable = true;

@@ -1,4 +1,6 @@
-{ pkgs, lib, inputs, config, self, ... }:
+{ pkgs, lib, inputs, config, self, ... }: let
+  kitty = "${config.programs.kitty.package}/bin/kitty";
+in
 {
   home.packages = with pkgs; [
     wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
@@ -95,7 +97,7 @@ window {
     config = let modifier = "Mod4"; mode_system = "(s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown"; in {
       modifier = modifier;
       # Use kitty as default terminal
-      terminal = "kitty";
+      terminal = kitty;
 
       focus.followMouse = false;
       defaultWorkspace = "workspace number 1";
@@ -128,11 +130,11 @@ window {
       };
 
       keybindings = let workspaces = [1 2 3 4 5 6 7 8]; in {
-        "${modifier}+Return" = "exec kitty";
+        "${modifier}+Return" = "exec ${kitty}";
 
         "${modifier}+Shift+q" = "kill";
 
-        "${modifier}+d" = "exec --no-startup-id wofi --show run";
+        "${modifier}+d" = "exec --no-startup-id ${pkgs.wofi}/bin/wofi --show run";
 
         "XF86AudioPlay" = "exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause";
         "XF86AudioPrev" = "exec --no-startup-id dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous";
@@ -223,7 +225,7 @@ window {
       bars = lib.mkDefault [{
         command = "swaybar";
         position = "bottom";
-        statusCommand = "i3status-rs ~/.config/i3status-rust/config-primary.toml";
+        statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-primary.toml";
 
         colors = {
           background = "#222D31";

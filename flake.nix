@@ -40,6 +40,30 @@
     let
     pkgs = import nixpkgs {
       system = "x86_64-linux";
+      overlays = [
+        # Override sway to 1.12-rc3 (with wlroots 0.20) for DisplayLink multi-GPU support
+        (final: prev: {
+          wlroots_0_20 = prev.wlroots_0_20.overrideAttrs (old: {
+            patches = (old.patches or []) ++ [
+              ./patches/wlroots-evdi-render-node.patch
+            ];
+          });
+          sway-unwrapped = prev.sway-unwrapped.overrideAttrs (old: {
+            version = "1.12-rc3";
+            src = prev.fetchFromGitHub {
+              owner = "swaywm";
+              repo = "sway";
+              rev = "1.12-rc3";
+              hash = "sha256-SuVEUxz/PN9kJV4GG4bW4BojY6KEoW0qf3UF93AxCDI=";
+            };
+            buildInputs = map (dep:
+              if dep.pname or "" == "wlroots" then
+                final.wlroots_0_20.override { enableXWayland = old.passthru.enableXWayland or true; }
+              else dep
+            ) old.buildInputs;
+          });
+        })
+      ];
     };
     home = hostModule: home-manager.lib.homeManagerConfiguration {
       extraSpecialArgs = { inherit inputs self; };
