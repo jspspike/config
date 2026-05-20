@@ -8,6 +8,10 @@
     extraSpecialArgs = { inherit inputs self; };
     users.jspspike.imports = [ ../../home-modules/common.nix ../../home-modules/sway.nix ];
     users.jspspike = {
+      services.syncthing = {
+        enable = true;
+        tray = { enable = true; command = "syncthingtray --wait"; };
+      };
       wayland.windowManager.sway.config = {
         output = {
           DP-2 = {

@@ -112,10 +112,7 @@ in
 
   services = {
     clipmenu.enable = true;
-    syncthing = {
-      enable = true;
-      tray = { enable = true; command = "syncthingtray --wait"; };
-    };
+
   };
 
   systemd = {
