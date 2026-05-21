@@ -20,12 +20,6 @@
   users.users.jspspike.packages = with pkgs; [ discord spotify inputs.pineapple.packages.x86_64-linux.android-messages mullvad-vpn qbittorrent vlc ];
 
   services = {
-    libinput = {
-      mouse = {
-        accelProfile = "flat";
-      };
-    };
-
     nginx = {
       enable = true;
     };

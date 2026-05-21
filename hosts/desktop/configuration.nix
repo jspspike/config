@@ -19,12 +19,6 @@
   };
 
   services = {
-    libinput = {
-      mouse = {
-        accelProfile = "flat";
-      };
-    };
-
     # Social Kiwi
     mullvad-netns = {
       enable = true;

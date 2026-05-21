@@ -1,0 +1,1 @@
+- Only leave comments if it's something non-trivial, not obvious from the logic. Also don't update method doc comments unless it's something core to the input, output or function of the method

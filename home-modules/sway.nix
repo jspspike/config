@@ -111,6 +111,10 @@ window {
         xkb_options = "caps:escape";
       };
 
+      input."type:pointer" = {
+        accel_profile = "flat";
+      };
+
       floating = {
         border = 1;
         titlebar = false;
