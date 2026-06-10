@@ -181,6 +181,7 @@ wk.add {
     { "<space>H", RUNFZF "highlights", desc = "Highlight" },
     { "<space>l", RUNFZF "lines", desc = "Search Lines" },
     { "<space>i", toggle_inlay_hints, desc = "Inlay Hints" },
+    { "<space>k", require("treesitter-context").toggle, desc = "Context Header" },
     { "<space>j", G.lazy("treesj", "toggle"), desc = "Split / Join" },
 
     { "<space>d", ":bd<CR>", desc = "Close Buffer" },
