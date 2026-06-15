@@ -39,9 +39,9 @@
     workspaceOutputAssign = [
       { workspace = "1"; output = "eDP-1"; }
       { workspace = "2"; output = "eDP-1"; }
-      { workspace = "3"; output = "DVI-I-1"; }
+      { workspace = "3"; output = [ "DVI-I-1" "DP-4" ]; }
       { workspace = "4"; output = "eDP-1"; }
-      { workspace = "5"; output = "DVI-I-1"; }
+      { workspace = "5"; output = [ "DVI-I-1" "DP-4" ]; }
     ];
     output = {
       eDP-1 = {
@@ -53,6 +53,11 @@
         mode = "3840x2160@59.997Hz";
         scale = "1.4";
         position = "1440 0";
+        background = "#2F4970 solid_color";
+      };
+      DP-4 = {
+        mode = "3440x1440@99.982Hz";
+        position = "-1000 -1040";
         background = "#2F4970 solid_color";
       };
     };
