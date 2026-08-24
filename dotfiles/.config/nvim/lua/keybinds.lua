@@ -100,6 +100,7 @@ RUNFZF = function(command, args) return G.lazy("fzf-lua", command, args) end
 
 G.lazy_load("treesj", { use_default_keymaps = false })
 GITS = require "gitsigns"
+local gitdiff = require "gitdiff"
 
 local wk = require "which-key"
 wk.setup {
@@ -144,9 +145,13 @@ wk.add {
     { "<space>gn", GITS.next_hunk, desc = "Next Hunk" },
     { "<space>gN", GITS.prev_hunk, desc = "Prev Hunk" },
     { "<space>gh", GITS.preview_hunk_inline, desc = "Show Hunk" },
-    { "<space>gs", GITS.stage_hunk, desc = "Stage Hunk" },
-    { "<space>gu", GITS.undo_stage_hunk, desc = "Undo Stage Hunk" },
-    { "<space>gr", GITS.reset_hunk, desc = "Reset Hunk" },
+    { "<space>gs", gitdiff.guard("Stage Hunk", GITS.stage_hunk), desc = "Stage Hunk" },
+    { "<space>gu", gitdiff.guard("Undo Stage Hunk", GITS.undo_stage_hunk), desc = "Undo Stage Hunk" },
+    { "<space>gr", gitdiff.guard("Reset Hunk", GITS.reset_hunk), desc = "Reset Hunk" },
+    -- stylua: ignore
+    { "<space>gd", desc = "Diff Since",
+        function() gitdiff.start(prompt { prompt = "Diff since: ", default = "HEAD^" }) end },
+    { "<space>gD", gitdiff.stop, desc = "Diff End" },
     { "<space>G", RUNFZF "git_status", desc = "Git Status" },
 
     { "<space>a", group = "Debug" },

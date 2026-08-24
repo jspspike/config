@@ -34,6 +34,8 @@ local function git()
     return "%#SignColumn# " .. table.concat(t, " ") .. " "
 end
 
+local function gitdiff() return require("gitdiff").status() end
+
 local function modified() return vim.o.modified and "%#StatusLineModified#" or "%#MoreMsg#" end
 
 vim.opt.showmode = false
@@ -57,7 +59,7 @@ StatusLine = {
     active = function()
         -- stylua: ignore
         return table.concat {
-            readonly(), file, git(), modified(), mode(),
+            gitdiff(), readonly(), file, git(), modified(), mode(),
             fill, diagnostics(), reset, line_col,
         }
     end,

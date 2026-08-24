@@ -81,6 +81,7 @@ in {
       fzf-lua
       hop-nvim
       treesj
+      vim-fugitive # packadd'd by lua/review.lua when review mode starts
     ];
 
     # used by image.nvim

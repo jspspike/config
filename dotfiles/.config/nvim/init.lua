@@ -30,6 +30,7 @@ require "plugins"
 require "completion"
 require "lsp"
 require "debugger"
+require "gitdiff"
 
 require "keybinds"
 
