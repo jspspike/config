@@ -46,6 +46,7 @@
     output = {
       eDP-1 = {
         mode = "2880x1800@60Hz";
+        scale = "1.8";
         position = "0 400";
         background = "#2F4970 solid_color";
       };
