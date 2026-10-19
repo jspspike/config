@@ -5,8 +5,11 @@
 # Local tools
 You can use `nix-shell -p <nix package name> --run "<program name>"` to run any programs that might not exist locally. For example `nix-shell -p nodejs --run "npm"`
 
-# git push
+# git
+## push
 When told to push on dolphin or dlp-scanner use the `--no-verify` flag to skip the local tests
+## worktrees
+When creating worktrees make the path be more descriptive than just the ticket number. Something like `jjohnson/DLP-1234-payload-logging-variant`
 
 # Local repos
 Before using the gitlab MCP to read source code look in ~/Projects. There are many relevant repos located there
